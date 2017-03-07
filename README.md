@@ -23,8 +23,8 @@
   
    **Classe NumeroUnico**
       1.	O sistema gera e salva em arquivo, utilizando a função numeros($args), uma lista¹ com as senhas que serão utilizadas para os sorteios;
-      2.	Para cada sorteio² a ser realizado será utilizado a função atribuiNumeroUnico($args). Esta função sorteia aleatoriamente as senhas da lista¹ (tópico a) utilizando a função shuffle³ e seleciona no banco de dados os candidatos participantes do sorteio em questão;
-      3.	Após obter a lista¹ aleatória de senhas e a lista de participantes do sorteio (tópico b), a função atribuiNumeroUnico($args) também atribui a cada participante uma senha, obedecendo a sequência de ambas as listas, adicionando esta senha no banco de dados;
+      2.	Para cada sorteio² a ser realizado será utilizado a função atribuiNumeroUnico($args). Esta função sorteia aleatoriamente as senhas da lista¹ (tópico i) utilizando a função shuffle³ e seleciona no banco de dados os candidatos participantes do sorteio em questão;
+      3.	Após obter a lista¹ aleatória de senhas e a lista de participantes do sorteio (tópico ii), a função atribuiNumeroUnico($args) também atribui a cada participante uma senha, obedecendo a sequência de ambas as listas, adicionando esta senha no banco de dados;
 
    **Classe Sorteio**
       1.	Depois de todos os participantes receberem suas senhas, a função sorteia($args) é utilizada para determinar os contemplados², selecionando aqueles que possuírem como senhas os valores que mais se aproximarem do número da loteria federal<sup>4</sup>;
