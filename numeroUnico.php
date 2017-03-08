@@ -2,7 +2,6 @@
 include_once "aleatorio.php";
 include_once "arquivo.php";
 include_once  "model.php";
-include_once "conecta.php";
 include_once "BD/conexao.php";
 class NumeroUnico
 {
@@ -36,6 +35,7 @@ class NumeroUnico
        $numsJson = json_encode($nums);
         $this->arquivo->escreve($numsJson,"numeroUnico");
    }
+
    function atualizaNumeroUnico($a){
        $aJson = json_encode($a);
        $this->arquivo->escreve($aJson,"numeroUnico");

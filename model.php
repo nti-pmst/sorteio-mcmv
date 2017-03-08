@@ -76,6 +76,24 @@ class Model{
         }
     }
 
+
+    function updateSorteioReserva($id,$grupo){
+        $PDO = $this->pdo;
+        $sql = "UPDATE pessoas SET contemplacao = :contemplacao, reserva = '1' WHERE id_pessoas = :id";
+
+        $stmt = $PDO->prepare( $sql );
+
+        $stmt->bindParam( ":contemplacao", $grupo );
+        $stmt->bindParam( ":id", $id);
+        $result = $stmt->execute();
+        if(! $result){
+            die($stmt->errorInfo());
+            return $stmt->errorInfo();
+        }else{
+            return "ok";
+        }
+    }
+
     function updateLimpaSorteio($grupo){
         $PDO = $this->pdo;
         $sql = "UPDATE pessoas SET contemplacao = '0' WHERE contemplacao = :contemplacao";
@@ -91,9 +109,38 @@ class Model{
         }
     }
 
+    function updateLimpaSorteioReserva($grupo){
+        $PDO = $this->pdo;
+        $sql = "UPDATE pessoas SET contemplacao = '0' WHERE contemplacao = :contemplacao AND reserva = '1'";
+
+        $stmt = $PDO->prepare( $sql );
+        $stmt->bindParam( ":contemplacao", $grupo );
+        $result = $stmt->execute();
+        if(! $result){
+            die($stmt->errorInfo());
+            return $stmt->errorInfo();
+        }else{
+            return "ok";
+        }
+    }
+
     function updateLimpaSorteioAll(){
         $PDO = $this->pdo;
-        $sql = "UPDATE pessoas SET contemplacao = '0', numeroUnico = '0' WHERE 1";
+        $sql = "UPDATE pessoas SET contemplacao = '0', numeroUnico = '0', reserva='0' WHERE 1";
+
+        $stmt = $PDO->prepare( $sql );
+        $result = $stmt->execute();
+        if(! $result){
+            die($stmt->errorInfo());
+            return $stmt->errorInfo();
+        }else{
+            return "ok";
+        }
+    }
+
+    function updateLimpaSorteioAllReserva(){
+        $PDO = $this->pdo;
+        $sql = "UPDATE pessoas SET contemplacao = '0', numeroUnico = '0' WHERE reserva='1'";
 
         $stmt = $PDO->prepare( $sql );
         $result = $stmt->execute();

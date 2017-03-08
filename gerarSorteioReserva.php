@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 include_once 'numeroUnico.php';
 include_once "arquivo.php";
-include_once 'sorteio.php';
+include_once 'sorteioReserva.php';
 
 if(isset($_REQUEST['numLoteria']) && is_numeric($_REQUEST["numLoteria"])){
     $numLoteria = $_REQUEST['numLoteria'];
@@ -21,75 +21,68 @@ $pdo = $con->con();
 $modal = new Model($pdo);
 $sorteio = new Sorteio($pdo);
 
+$numeroUnico = new NumeroUnico();
 if($grupo=="ZERO"){
-    $modal->updateLimpaSorteioAll();
-    $arquivo = new Arquivo();
-    $arquivo->delete("numeroUnico");
+    $numeroUnico->devolveArray("deficientes");
+    $numeroUnico->devolveArray("idosos");
+    $numeroUnico->devolveArray("i");
+    $numeroUnico->devolveArray("ii");
+    $numeroUnico->devolveArray("iii");
+    $modal->updateLimpaSorteioAllReserva();
     die("ok");
 }
 
-$numParticipantes = 2410;
-$numAreaRisco = 8;
-$numCasas = 902;
+$numParticipantes = 1512;
 
 
-$numeroUnico = new NumeroUnico();
+
 
 $num = $numeroUnico->numeros($numLoteria,$numParticipantes);
 
 
 $numeroUnico->atribuiNumeroUnico($grupo);
 
-$aux = $numCasas;
+$aux = $numCasas=269;
 
-$deficientes = 28; //ceil (3*$aux/100);
+$deficientes = 8;
 
-$idosos = 28; //ceil (3*$aux/100);
+$idosos = 8;
 
-//$aux2 = $aux - $deficientes - $idosos - $numAreaRisco;
+//$aux2 = $aux - $deficientes - $idosos;
 
-$i = 503; //round(60*$aux2/100);
+$i = 151;
 
-$ii = 209; //round(25*$aux2/100);
+$ii = 63;
 
-$iii = 126; //round(15*$aux2/100);
+$iii = 38;
+
 
 
 if($grupo == "deficientes"){
-    $sorteio->updateLimpaSorteio($grupo);
+    $sorteio->updateLimpaSorteioReserva($grupo);
     $sorteio->sorteia($grupo,$deficientes,$grupo);
 }
 
 if($grupo == "idosos"){
-    $sorteio->updateLimpaSorteio($grupo);
+    $sorteio->updateLimpaSorteioReserva($grupo);
     $sorteio->sorteia($grupo,$idosos,$grupo);
 }
 
 if($grupo == "i"){
-    $sorteio->updateLimpaSorteio($grupo);
+    $sorteio->updateLimpaSorteioReserva($grupo);
     $sorteio->sorteia($grupo,$i,$grupo);
 }
 
 if($grupo == "ii"){
-    $sorteio->updateLimpaSorteio($grupo);
+    $sorteio->updateLimpaSorteioReserva($grupo);
     $sorteio->sorteia($grupo,$ii,$grupo);
 }
 
 if($grupo == "iii"){
-    $sorteio->updateLimpaSorteio($grupo);
+    $sorteio->updateLimpaSorteioReserva($grupo);
     $sorteio->sorteia($grupo,$iii,$grupo);
 }
 
 
 
 echo "ok";
-
-
-
-
-/**
- * Created by PhpStorm.
- * User: neex
- * Date: 06/03/2017
- * Time: 00:08
- */
